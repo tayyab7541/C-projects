@@ -1,2 +1,3 @@
 # C-projects
-All the projects that i have done are available
+All the projects that I have done are available these are projects of c++
+
