@@ -11,6 +11,7 @@ class vehicle
 
     void input()
     {
+        cin.ignore();
     cout<<"Name of vehicle = ";
     getline(cin,name);
     cout<<"Registration number of vehicle = ";
