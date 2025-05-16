@@ -1,64 +1,16 @@
-#include<iostream>
+
+
+#include<iostream> 
 #include<string>
 #include<cmath>
+#include<stdio.h>
+
 using namespace std;
 
 int calsum(int n1,int n2 ); //recursive function to calculate sum of two numbers 
-double powercal(int num,int pow); //recursive function to calculate power of number 
-
-
+double powercal(int num,int pow); //recursive function to calculate power of number
 class course; // this is forward declaration
 
-class User  // parent class
-{
-    protected: //data members
-    string name;
-    int id;
-    static int count_user; //static member to count users
-
-    public:
-    User() 
-    {
-        count_user++;
-    } //default constructure
-    virtual void displayinfo()=0;
-    static int getvalue()
-    {
-        return count_user;
-    }
-};
-
-int User::count_user=0; //initializing static data member
-class student:public User  //first child class
-{
-     protected:
-     double fee;
-     int semester;
-     public:
-     void inputinfo(); //it is used to input data members of student class  
-     void displayinfo() //overriding pure virtual function
-     {
-    cout<<"Name  \t ID  \t Fee \t semester# \n";
-    cout<<name<<"\t"<<id<<"\t"<<fee<<"\t"<<semester<<endl;
-      }
-
-    
-
-};
-class teacher:public User  //this is second child class
-{
-    protected:
-    int year_of_experience;
-    double pay;
-    public:
-    void inputinfo();
-    void displayinfo() //overriding pure virtual function
-    {
-       cout<<"Name \t   ID \t years of exp \t pay \n";
-     cout<<name<<"\t"<<id<<"\t"<<year_of_experience<<"\t \t"<<pay<<endl;
-
-    }
-};
 
 template <class t>
 class calculator
@@ -83,11 +35,98 @@ class calculator
         credit_h=new t[num_of_subject];
         in(marks,credit_h,num_of_subject,0); //calling recursive function to input
         gpa=cal(marks,credit_h,num_of_subject,0,gp);  //calling recursive function to calculate gpa
-        cout<<"your gpa is = "<<gpa;
+        cout<<"your gpa is = "<<gpa<<endl;
      }
      
 
 };
+
+
+
+
+
+class User  // parent class
+{
+    protected: //data members
+    string name;
+    int id;
+    static int count_user; //static member to count users
+
+    public:
+    User() //default constructure
+    {
+        count_user++;
+    } 
+    virtual void displayinfo()=0;
+    virtual void calculate_performane()=0;
+    static int getvalue()
+    {
+        return count_user;
+    }
+};
+
+int User::count_user=0; //initializing static data member
+class student:public User  //first child class
+{
+     protected:
+     double fee;
+     int semester;
+     public:
+     void inputinfo(); //it is used to input data members of student class  
+     void displayinfo() //overriding pure virtual function
+     {
+    cout<<"Name  \t ID  \t Fee \t semester# \n";
+    cout<<name<<"\t"<<id<<"\t"<<fee<<"\t"<<semester<<endl;
+      }
+
+      void calculate_performane()//overriding pure virtual function
+      {
+           calculator<int> c;
+           c.input();
+      }
+
+    friend void fun(student&,course&); //declaration of friend function
+
+};
+class teacher:public User  //this is second child class
+{
+    protected:
+    int year_of_experience;
+    double pay;
+    public:
+    void inputinfo();
+    void calculate_performane()//overriding pure virtual function
+    {
+
+    }
+    void displayinfo() //overriding pure virtual function
+    {
+       cout<<"Name \t         ID \t years of exp \t pay \n";
+     cout<<name<<"\t \t"<<id<<"\t"<<year_of_experience<<"\t \t"<<pay<<endl;
+
+    }
+};
+
+
+
+class course
+{
+    protected:
+              string name;
+              int id;
+              double fee;
+              int semester;
+              public:
+              void input();
+              friend void fun(student&,course&);
+            friend  ostream operator<<(ostream &st,course& c)
+            {
+                st<<c.name<<"\t"<<c.id<<"\t"<<c.fee<<"\t"<<c.semester<<endl;
+            }
+
+
+};
+
 
 //Main starts here
 
@@ -98,7 +137,7 @@ int main()
     int num;
     do
     {
-        cout<<"Welcome to Smart University Managment system \n =============================================== \n 1.To creat student \n 2. To creat professor  \n 3. To calculate GPA \n 4. To assign course \n 5. To find sum to two numbers recursively  \n 6 . To find power of number \n 7. To exit \n  Enter your coice = ";
+        cout<<"Welcome to Smart University Managment system \n =============================================== \n 1.To creat student \n 2. To creat professor  \n 3. To calculate GPA \n 4. To assign course \n 5. To find sum to two numbers recursively  \n 6 . To find power of number\n7:To calculate performance of student\n8:to calculate performance of teacher \n9. To exit \n  Enter your coice = ";
         cin>>num;
         if(num==1)
         {
@@ -128,6 +167,18 @@ int main()
         }
         else if(num==4)
         {
+            course c;
+            student st;
+            c.input();
+            fun(st,c);
+            cout<<c;
+            cout<<"Students record displayin via student class function \n";
+            st.displayinfo();
+            
+        }
+
+        else if(num==5)
+        {
             int n1,n2;
             cout<<"Enter first number = ";
             cin>>n1;
@@ -135,7 +186,7 @@ int main()
             cin>>n2;
             cout<<"sum of two numbers = "<<calsum(n1,n2)<<endl;
         }
-        else if(num==5)
+        else if(num==6)
         {
             int num1,num2;
             cout<<"Enter number = ";
@@ -146,7 +197,17 @@ int main()
         }
         else if(num==7)
         {
-            found=0;
+            student st;
+            st.calculate_performane();
+            st.displayinfo();
+
+        }
+
+
+
+        else if(num==9)
+        {
+            found=0; 
         }
         else
         {
@@ -188,7 +249,7 @@ template <class t>t calculator<t>::cal(t *ar,t *credit,t n,t i,t gpa) //recursiv
         int sum=0;
         for(int j=0;j<n;j++)
         {
-            sum+=credit[i];
+            sum+=credit[j];
         }
         return gpa/sum;
     }
@@ -196,35 +257,35 @@ template <class t>t calculator<t>::cal(t *ar,t *credit,t n,t i,t gpa) //recursiv
     {
         if(ar[i]>=80&&ar[i]<=100)
         {
-            return 4*credit[i] + cal(ar,credit,n,i+1,gpa);
+            return  cal(ar,credit,n,i+1,gpa+=credit[i]*4);
         }
         else if(ar[i]>=75&&ar[i]<80)
         {
-            return 3.5*credit[i] + cal(ar,credit,n,i+1,gpa);
+            return  cal(ar,credit,n,i+1,gpa+=credit[i]*3.5);
         }
         else if(ar[i]>=70&&ar[i]<75)
         {
-           return 3*credit[i] + cal(ar,credit,n,i+1,gpa);
+           return  cal(ar,credit,n,i+1,gpa+=credit[i]*3);
         }
         else if(ar[i]>=65&&ar[i]<70)
         {
-            return 2.5*credit[i] +cal(ar,credit,n,i+1,gpa);
+            return cal(ar,credit,n,i+1,gpa+=credit[i]*2.5);
         }
         else if(ar[i]>=60&&ar[i]<65)
         {
-            return 2*credit[i] + cal(ar,credit,n,i+1,gpa);
+            return cal(ar,credit,n,i+1,gpa+=credit[i]*2);
         }
         else if(ar[i]>=55&&ar[i]<60)
         {
-            return 1.5*credit[i] + cal(ar,credit,n,i+1,gpa);
+            return cal(ar,credit,n,i+1,gpa+=credit[i]*1.5);
         }
         else if(ar[i]>=50&&ar[i]<55)
         {
-            return 1*credit[i] +cal(ar,credit,n,i+1,gpa);
+            return cal(ar,credit,n,i+1,gpa+=credit[i]*1);
         }
         else 
         {
-            return 0*credit[i] + cal(ar,credit,n,i+1,gpa);
+            return  cal(ar,credit,n,i+1,gpa+=credit[i]*0);
         }
     }
 }
@@ -264,7 +325,9 @@ double powercal(int num1,int pow) //recursive function to calculate powere of nu
 
 void student::inputinfo()  //method of student class to input data members 
 {
+
     cout<<"Enter name of student = ";
+    cin.ignore();
     getline(cin,name);
     cout<<"Enter ID of student = ";
     cin>>id;
@@ -276,6 +339,7 @@ void student::inputinfo()  //method of student class to input data members
 void teacher::inputinfo() //method of teacher class to input data 
 {
     cout<<"Enter name = ";
+    cin.ignore();
     getline(cin,name);
     cout<<"Enter id of teacher = ";
     cin>>id;
@@ -285,3 +349,23 @@ void teacher::inputinfo() //method of teacher class to input data
     cin>>pay;
 }
 
+void fun(student& st,course& other) 
+{
+    st.name=other.name;
+    st.id=other.id;
+    st.fee=other.fee;
+    st.semester=other.semester;
+}
+
+void course::input()  //function to input data in course class
+{
+    cout<<"Enter student name = ";
+    cin.ignore();
+    getline(cin,name);
+    cout<<"Enter id = ";
+    cin>>id;
+    cout<<"enter fee = ";
+    cin>>fee;
+    cout<<"enter semester number = ";
+    cin>>semester;
+}
