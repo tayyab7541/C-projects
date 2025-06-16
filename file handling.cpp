@@ -24,13 +24,13 @@ int main()
 	    file<<name<<"\t"<<age<<"\t"<<semester<<endl;		
 	}
 	file.close();
-	fstream f;
-	f.open("F:\\OOPs\\malik.txt",ios::in);
+	fstream file;
+	file.open("F:\\OOPs\\malik.txt",ios::in);
 	string l;
-	while(getline(f,l))
+	while(getline(file,l))
 	{
 		cout<<l;
 	}
-	f.close();
+	file.close();
 	return 0;
 }
