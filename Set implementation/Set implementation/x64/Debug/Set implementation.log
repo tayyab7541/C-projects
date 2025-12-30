@@ -1,0 +1,22 @@
+﻿  Set implementation.cpp
+F:\Final DSA Prep\Set implementation\Set implementation\set.h(195,21): warning C4553: '==': result of expression not used; did you intend '='?
+  (compiling source file 'Set%20implementation.cpp')
+  
+F:\Final DSA Prep\Set implementation\Set implementation\set.h(196,19): warning C4553: '==': result of expression not used; did you intend '='?
+  (compiling source file 'Set%20implementation.cpp')
+  
+F:\Final DSA Prep\Set implementation\Set implementation\set.h(197,20): warning C4553: '==': result of expression not used; did you intend '='?
+  (compiling source file 'Set%20implementation.cpp')
+  
+F:\Final DSA Prep\Set implementation\Set implementation\set.h(400,27): warning C4553: '==': result of expression not used; did you intend '='?
+  (compiling source file 'Set%20implementation.cpp')
+  
+F:\Final DSA Prep\Set implementation\Set implementation\set.h(401,28): warning C4553: '==': result of expression not used; did you intend '='?
+  (compiling source file 'Set%20implementation.cpp')
+  
+F:\Final DSA Prep\Set implementation\Set implementation\set.h(402,29): warning C4553: '==': result of expression not used; did you intend '='?
+  (compiling source file 'Set%20implementation.cpp')
+  
+  Set implementation.vcxproj -> F:\Final DSA Prep\Set implementation\x64\Debug\Set implementation.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
