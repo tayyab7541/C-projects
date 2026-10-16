@@ -410,7 +410,7 @@ public:
 		balance_factor_cheking = del->parent;
 		if (del == head)
 		{
-			throw("Dummy should not be deleted \n");
+			throw("Dummy head should not be deleted \n");
 		}
 		else if (del->parent != head)  // removing nodes except root node 
 		{
